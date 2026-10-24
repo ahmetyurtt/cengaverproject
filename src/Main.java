@@ -1,11 +1,15 @@
+import datastructures.DynamicSongArray;
 import model.Song;
 public class Main {
     public static void main(String[] args) {
-        //Bir şarkı nesnesi üretelim
-        Song sarki1=new Song(1,"Benim Yerimede Sev","Sezen Aksu",316);
-        System.out.println("Oluşturulan şarkı: "+sarki1);
-        System.out.println("Şarkının adı (Getter ile): "+sarki1.getTitle());
-        sarki1.setTitle("Begonvil");
-        System.out.println("Güncellenmiş hali (Setter sonrası) :"+sarki1);
+        DynamicSongArray katalog=new DynamicSongArray();
+        System.out.println("Başlangıç kapasitesi: "+katalog.getCapacity());// burada başlangıç kapasitesini yazdırıyoruz
+        System.out.println("Başlangıç boyutu: "+katalog.getSize());
+        for(int i=1;i<=12;i++){
+            katalog.add(new Song(i,"Şarkı Adı","Sanatçı",200));//burada ise tam 12 tane yeni şarkı nesnesi ekliyoruz
+        }
+        System.out.println("Yeni kapasite: "+katalog.getCapacity()); // burda ise kapasiteyi görüyoruz.
+        System.out.println("Şarkı sayısı: "+katalog.getSize()); //burada aktif şarkı sayısı
+        katalog.printAll(); //tüm şarkı nesnelerini yazdırıyoruz
     }
 }
