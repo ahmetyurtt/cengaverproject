@@ -1,3 +1,4 @@
+import datastructures.DynamicSongArray;
 import model.Song;
 import playlist.DoublyLinkedPlaylist;
 import playlist.PlaylistNode;
@@ -28,5 +29,16 @@ public class Main {
         System.out.println("1. vagondaki şarkı: "+vagon1.song.getTitle());
         System.out.println("1. vagondan next e basılınca: "+ vagon1.next.song.getTitle());
         System.out.println("2. vagonda prev e basılırsa: "+ vagon2.prev.song.getTitle());
+
+        DynamicSongArray katalog=new DynamicSongArray();
+        System.out.println("Başlangıç kapasitesi: "+katalog.getCapacity());// burada başlangıç kapasitesini yazdırıyoruz
+        System.out.println("Başlangıç boyutu: "+katalog.getSize());
+        for(int i=1;i<=12;i++){
+            katalog.add(new Song(i,"Şarkı Adı","Sanatçı",200));//burada ise tam 12 tane yeni şarkı nesnesi ekliyoruz
+        }
+        System.out.println("Yeni kapasite: "+katalog.getCapacity()); // burda ise kapasiteyi görüyoruz.
+        System.out.println("Şarkı sayısı: "+katalog.getSize()); //burada aktif şarkı sayısı
+        katalog.printAll(); //tüm şarkı nesnelerini yazdırıyoruz
+
     }
 }
