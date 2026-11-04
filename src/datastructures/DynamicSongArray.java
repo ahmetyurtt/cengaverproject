@@ -39,9 +39,37 @@ public class DynamicSongArray {
     }
 
     public void printAll() { //Dizideki tüm şarkıları alt alta görebilmek için bi fonksiyon.
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             System.out.println(songs[i]);
         }
-
     }
-}
+        public boolean removeById ( int id){//İndekse göre veri silme işlemi için metod ekliyoruz.Veriyi sildikten sonra elemanları birer sola kaydırarak düzene koymamızda gerekiyor burda.
+            for (int i = 0; i < size; i++) { //bu döngü arıyor bizim girdiğimiz değeri onu bulana kafar döner
+
+                if (songs[i].getId() == id) {//bulduysan eğer.. demek
+                    for (int j = i; j < size - 1; j++) {  //buradaki döngümüz ise boşluğu doldurmak. Yani bulup çıkarttığımız değerden sonra bir sola kaydırdı değerleri.
+
+                        songs[j] = songs[j + 1];
+
+                    }
+                    songs[size - 1] = null;
+                    size--;
+                    return true;
+                }
+
+            }
+            return false;
+
+        }
+        public boolean updateSong(int id,String newTitle,String newArtist,int newDurationInSeconds){//Burada yaptığımız şey tam olarak şu şarkının aktif kimliğini(ismini sanatçı adını vs) değiştirerek ona yeni bir kimlik yapmak.
+      for(int i=0;i<size;i++){
+          if(songs[i].getId()==id) {
+              songs[i].setTitle(newTitle);
+              songs[i].setArtist(newArtist);
+              songs[i].setDurationInSeconds(newDurationInSeconds);
+              return true;
+          }
+      }
+      return false;
+        }
+    }

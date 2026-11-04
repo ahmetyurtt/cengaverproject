@@ -40,5 +40,13 @@ public class Main {
         System.out.println("Şarkı sayısı: "+katalog.getSize()); //burada aktif şarkı sayısı
         katalog.printAll(); //tüm şarkı nesnelerini yazdırıyoruz
 
+        System.out.println("\n ----SİLME TESTİ----");
+        katalog.removeById(5); //ID'si 5 olan şarkıyı silelim.
+        System.out.println("5 numaralı şarkıyı sildikten sonraki boyutumuz: "+katalog.getSize());
+        katalog.printAll();
+
+        System.out.println("\n----GUNCELLEME TESTİ----");
+        katalog.updateSong(3,"Gulpembe","Barış Manço",300);
+        katalog.printAll();
     }
 }
