@@ -72,4 +72,32 @@ public class DynamicSongArray {
       }
       return false;
         }
+
+
+      public Song searchByTitle(String title){ // başlığa göre şarkı arama metodu ekliyoruz.Tek tek tüm elemanları gezicek ve aradığını bulunca durucak bir metod yapıyoruz yani bu O(N) oluyor.
+      for(int i=0;i<size;i++){
+          if(songs[i].getTitle().equalsIgnoreCase(title)){ //equalsIgnoreCase büyük harfde olsa küçük harfde olsa o kelimeye eşit mi değil mi kontrolü yapıyor.
+return songs[i]; //eğer varsa şarkıyı ver.
+          }
+      }
+return null; // yoksa null ver dedik.
+      }
+
+     public Song binarySearchById(int targetId){ //Binary search(ikili arama):Sıralı dizideki her adımda ortadaki elemana bakar. Aranan değer ortadakinden küçükse eğer sola,büyükse sağa bakar.Böylece her adımda seçeneklerin yarısını eleyerek hızlıca istenen değeri bulur. ---->O(LogN)
+      int low=0;
+      int high=size-1;
+      while(low<=high){ //baştan sona kadar devam et anlamında
+   int mid=(low+high)/2;// başı ile ortası arasını aldık yani listenin yarısından katladık
+      if(songs[mid].getId()==targetId){ //değer yarısındaysa return döndür.
+          return songs[mid]; //bulduk işte
+      }
+      if(targetId<songs[mid].getId()){// aradığımız ID,ortadakinden daha mı küçük? o zaman soluna bak.
+          high=mid-1;
+      }
+      else{//eğer aradığınız ıd daha  büyükse sağa bakalım.
+          low=mid+1;
+      }
+      }
+      return null; //eğer yoksa null döndür.Bulunamadı.
+     }
     }
