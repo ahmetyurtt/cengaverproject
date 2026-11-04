@@ -44,11 +44,49 @@ public class DoublyLinkedPlaylist{
         size++;
     }
 
+    public Song playFirst(){
+        current = head;
+        return (current != null) ? current.song : null;
+    }
+
+    public Song nextSong(){
+        if(current != null && current.next != null){
+            current = current.next;
+            return current.song;
+        }
+        return null;
+    }
+
+    public Song prevSong(){
+        if(current != null && current.prev != null){
+            current = current.prev;
+            return current.song;
+        }
+        return null;
+    }
+
+    public Song getCurrentSong(){
+        return(current != null) ? current.song : null;
+    }
+
     public void removeSong(Song song){
         PlaylistNode temp = head;
 
         while (temp != null){
             if(temp.song.getTitle().equals(song.getTitle())){
+
+
+                if(temp == current){
+                    if(temp.next != null){
+                        current = current.next;
+                    }else if(temp.prev != null){
+                        current = current.prev;
+                    }else{
+                        current = null;
+                    }
+                }
+
+
                 if(temp == head){//zaten tek bir şarkı varsa
                     head=temp.next;
                     if(head != null){
@@ -73,6 +111,13 @@ public class DoublyLinkedPlaylist{
             temp = temp.next;
 
         }
+    }
+
+    public void clear(){
+        head = null;
+        tail = null;
+        current = null;
+        size = 0;
     }
 
     public void testMethod(){
