@@ -38,4 +38,17 @@ public boolean isEmpty(){
 public int getSize(){
     return size;
 }
+//Geçmişteki şarkıları yazdırıcı
+public void printStack(){
+    if(isEmpty()){
+        System.out.println("Dinleme geçmişi boş");
+        return;
+    }
+    System.out.println("  DİNLEME GEÇMİŞİ   ");
+    StackNode current=top;
+    while(current != null){
+        System.out.println("---"+current.song.toString());
+        current=current.next;//bir sonrakine geçirir
+    }
+}
 }
