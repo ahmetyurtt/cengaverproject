@@ -1,11 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+
 //Uygulamanın Ana Swing Ekranı
 
 public class MainFrame extends JFrame{
@@ -13,6 +16,8 @@ public class MainFrame extends JFrame{
     public MainFrame(){
         setTitle("CENGaverler Müzik Uygulaması");//Başlık
         
+        setLayout(new BorderLayout());
+
         setSize(900,600);//Ekran Büyüklüğü
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Kapatma Tuşu
@@ -50,12 +55,45 @@ public class MainFrame extends JFrame{
 
         //sekmeleri ana ekrana ekler
         add(tabbedPane);
+
+        //Alt oynatma paneli
+        JPanel playerPanel = new JPanel(new BorderLayout());
+        playerPanel.setBackground(new Color(15,23,42));//Ekranın altındaki çubuk
         
+
+        //Çalan şarkı bilgisi sol tarafta
+        JLabel nowPlayingLabel=new JLabel("Şuan çalan şarkı :");
+        nowPlayingLabel.setForeground(accentColor);//rengini fontunu falan ayarlıyoruz
+        nowPlayingLabel.setFont(new Font("SanSerif",Font.BOLD,14));
+        playerPanel.add(nowPlayingLabel,BorderLayout.WEST);
+
+        //orta taraf kontrol butonları
+        JPanel controlsPanel=new JPanel(new FlowLayout(FlowLayout.CENTER,15,10));
+        controlsPanel.setBackground(new Color(15,23,42));
+
+        //Butonlar
+        JButton btnPrev=new JButton("<-- Önceki");
+        JButton btnPlay=new JButton("|> Oynat");
+        JButton btnNext=new JButton("Sonraki -->");
+
+        //Buton tasarımları
+        styleButton(btnPrev, panelDark, textColor);
+        styleButton(btnPlay, accentColor, bgDark); // Oynat butonu belirgin mavi
+        styleButton(btnNext, panelDark, textColor);
+
+        controlsPanel.add(btnPrev);
+        controlsPanel.add(btnPlay);
+        controlsPanel.add(btnNext);
+        playerPanel.add(controlsPanel, BorderLayout.CENTER);
+
+        add(playerPanel,BorderLayout.SOUTH);
+
+
         setVisible(true);//Ekranın görünmesini sağlar
         
 
     }
-private JPanel createStyledPanel(String titleText,Color bgColor, Color accentColor){
+    private JPanel createStyledPanel(String titleText,Color bgColor, Color accentColor){
     JPanel panel = new JPanel(new BorderLayout());
     panel.setBackground(bgColor);
 
@@ -65,6 +103,13 @@ private JPanel createStyledPanel(String titleText,Color bgColor, Color accentCol
     panel.add(label,BorderLayout.CENTER);
     return panel;
 
+}
+//style metodumuz
+private void styleButton(JButton btn, Color bgColor, Color fgColor) {
+    btn.setBackground(bgColor);
+    btn.setForeground(fgColor);
+    btn.setFont(new Font("SansSerif", Font.BOLD, 13));
+    btn.setFocusPainted(false);
 }
 
    //Ana kod
