@@ -40,5 +40,25 @@ public class Main {
         System.out.println("Şarkı sayısı: "+katalog.getSize()); //burada aktif şarkı sayısı
         katalog.printAll(); //tüm şarkı nesnelerini yazdırıyoruz
 
+        System.out.println("\n ----SİLME TESTİ----");
+        katalog.removeById(5); //ID'si 5 olan şarkıyı silelim.
+        System.out.println("5 numaralı şarkıyı sildikten sonraki boyutumuz: "+katalog.getSize());
+        katalog.printAll();
+
+        System.out.println("\n----GUNCELLEME TESTİ----");//Şarkıya yeni bir kimlik yazıyoruz(update)
+        katalog.updateSong(3,"Gulpembe","Barış Manço",300);
+        katalog.printAll();
+
+        System.out.println("\n----ARAMA TESTLERİ----");//şarkının listede olup olmadığını kontrol ediyoruz.
+        Song bulunanSarki=katalog.searchByTitle("Gulpembe");//Gulpembe var mı?
+        System.out.println("İsme göre bulunan şarkı: "+bulunanSarki);
+
+        Song idleBulunan=katalog.binarySearchById(8);//Burada  ıd numarası ile arama yapıyoruz
+        System.out.println("Binary search ile bulunan (ID=8): "+idleBulunan);
+
+        Song olmayanSarki=katalog.binarySearchById(99);//olmayan bir şarkıda deneme yapalım
+        System.out.println("Olmayan şarkı arama sonucumuz: "+olmayanSarki);
+
     }
+
 }
