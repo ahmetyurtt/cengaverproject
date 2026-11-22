@@ -140,6 +140,94 @@ public class DoublyLinkedPlaylist{
 
     }
 
+    public void moveUp(Song song){
+        PlaylistNode temp = head;
+
+
+        while (temp != null && !temp.song.getTitle().equals(song.getTitle())){
+            temp = temp.next;
+        }
+
+        if(temp == null || temp.prev == null){
+            return;
+        }
+
+        PlaylistNode ustteki = temp.prev;
+
+        //üst tarafı bağlıyoruz
+        if(ustteki.prev != null){
+            ustteki.prev.next = temp;
+        }else {
+            head = temp;
+        }
+        temp.prev = ustteki.prev;
+
+        //alt tarafı bağlıyoruz
+        ustteki.next = temp.next;
+        if(temp.next != null){
+            temp.next.prev = ustteki;
+        }else {
+            tail = ustteki;
+        }
+
+        //en son bağlıyoruz
+        temp.next = ustteki;
+        ustteki.prev = temp;
+
+    }
+
+    public void moveDown(Song song){
+        PlaylistNode temp = head;
+
+        while (temp != null && !temp.song.getTitle().equals(song.getTitle())){
+            temp = temp.next;
+        }
+
+        if(temp == null || temp.next == null){
+            return;
+        }
+
+        PlaylistNode alttaki = temp.next;
+
+        //üst tarafı bağla
+        if(temp.prev == null){
+            head = alttaki;
+        }else {
+            temp.prev.next = alttaki;
+        }
+        alttaki.prev = temp.prev;
+
+        //alt tarafı bağla
+        temp.next = alttaki.next;
+        if(temp.next == null){
+            tail = temp;
+        }else {
+            alttaki.next.prev = temp;
+        }
+
+        //ikisini bağla
+        alttaki.next = temp;
+        temp.prev = alttaki;
+
+    }
+
+    public boolean containsSong(Song song){
+        if (song == null){
+            return false;
+        }
+
+        PlaylistNode temp = head;
+
+        while (temp != null){
+            if(temp.song.getTitle().equals(song.getTitle())){
+                return true;
+            }
+            temp = temp.next;
+        }
+
+        return false;
+    }
+
 
 
 
