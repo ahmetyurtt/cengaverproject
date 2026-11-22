@@ -100,4 +100,39 @@ return null; // yoksa null ver dedik.
       }
       return null; //eğer yoksa null döndür.Bulunamadı.
      }
+     //İki şarkının dizideki yerini değiştiren yardımcı metot(QuickSort için gerekiyor bu)
+     private void swap(int i,int j){
+      Song temp=songs[i];//1. i. sıradaki şarkı kaybolmasın diye geçici değişkende saklıyoruz
+      songs[i]=songs[j];//2.j. sıradaki i.sıraya taşıyoruz
+      songs[j]=temp;//3.sakladığımız eski şarkıyıda (temp) j.sıraya koy
+     }
+     //diziyi pivot elemana göre küçükler(sol)ve büyükler (sağ)diye bölen metot
+    private int partition(int low,int high){
+      int pivot=songs[high].getDurationInSeconds();//en sondaki şarkının süresini referans seçtik adı da pivot oldu
+      int i=low-1;//küçük elemanların toplanacağı sol bölgenin sınır işareti
+      for(int j=low;j<high;j++){
+          //Eger suanki şarkının süresi pivottan küçük veya eşitse sol tarafa al
+          if(songs[j].getDurationInSeconds()<=pivot){
+              i++;//Sol bölgeyi 1 adım genişlet
+              swap(i,j);//Küçük şarkıyı sol bölgeye taşı
+          }
+      }
+      swap(i+1,high); //pivot şarkıyı,küçüklerin hemen sağında (tam olması gereken yere)koymalıyız.
+      return i+1; //pivotun yeni indeksini geri döndür
+    }
+    //quickSort(hızlı sıralama) ana özyinelemeli metot
+    private void quickSort(int low,int high){
+      if(low<high){//sıralanacak en az 2 eleman varsa devam et koşulu
+          int pivotIndex;
+          pivotIndex=partition(low,high);//diziyi pivota göre böl ve pivotun yerleştiği indeksi al
+          quickSort(low,pivotIndex-1);//pivotun sol tarafında kalan küçükleri kendi içinde sırala
+          quickSort(pivotIndex+1,high);//pivotun sağ tarafında kalan büyükleri kendi içinde sırala
+      }
+    }
+    //Az önce yazdığımız quickSort metoduna dışarıdan ulaşılamaz ve her sıralamayı istediğimizde 0 dan başla size-1 e kadar git demek istemiyoruz bundan dolayı bu metodu kullanırız
+    public void sortByDuration(){
+      if(size>1){//Eger dizide 1'den fazla şarkı varsa,private olan metodu (0,size-1) cagir
+          quickSort(0,size-1);
+      }
+    }
     }

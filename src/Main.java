@@ -59,6 +59,11 @@ public class Main {
         Song olmayanSarki=katalog.binarySearchById(99);//olmayan bir şarkıda deneme yapalım
         System.out.println("Olmayan şarkı arama sonucumuz: "+olmayanSarki);
 
+       System.out.println("\n----SIRALAMA TESTİ(QUİCKSORT)----");
+       katalog.add(new Song(111,"Magnet","NotForRadio",235));
+       katalog.add(new Song(112,"Sadece","Kalben",175));
+       katalog.add(new Song(113,"The Winner Takes it All","Merly Streep",299));
+       katalog.sortByDuration();
+       katalog.printAll();
     }
-
 }
