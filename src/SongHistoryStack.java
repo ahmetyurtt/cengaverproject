@@ -49,7 +49,9 @@ private void removeBottomNode(){
     size--;
 }
 
-
+public StackNode getTop() {
+    return top;
+}
 //Boşmu dolumu kontrol eder
 public boolean isEmpty(){
     return top==null;
@@ -57,6 +59,10 @@ public boolean isEmpty(){
 //Geçmişteki şarkı sayısını söyler
 public int getSize(){
     return size;
+}
+//Arayüzdeki listeyi güncellemek için en üsteki  şarkıyı verir
+public StackNode gettop(){
+    return top;
 }
 //Geçmişteki şarkıları yazdırıcı
 public void printStack(){
